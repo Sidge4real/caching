@@ -1,0 +1,26 @@
+Performance Analysis with and without Redis Caching:
+
+1. **With Redis (port 8000)**:
+   - **Time to first byte**: 0.003350 seconds
+   - **Total time**: 0.003464 seconds
+
+   Explanation:
+   - The server responds **very quickly**, with only 0.003350 seconds for the time to the first byte.
+   - The total time of 0.003464 seconds indicates that Redis is working effectively, as the data is likely being fetched from the cache, and the server responds quickly.
+   - This suggests that Redis caching improves performance significantly by making data readily available in memory.
+
+2. **Without Redis (port 8001)**:
+   - **Time to first byte**: 0.535900 seconds
+   - **Total time**: 0.536196 seconds
+
+   Explanation:
+   - The time to the first byte is **much slower**, at 0.535900 seconds, indicating a significant delay.
+   - The total time of 0.536196 seconds is also much higher. This is likely because the server has to make external API calls (such as to the News API) for every request.
+   - This highlights the difference between quick data access via Redis and the slower process of fetching data from external sources.
+
+### Conclusion:
+- **With Redis**: Using Redis provides a significant speed improvement because the data is stored locally in the cache, leading to faster response times for subsequent requests.
+- **Without Redis**: Without caching, the server relies on external API calls, which considerably increases the response time, especially for repetitive requests.
+- **Recommendation**: Using Redis caching is an efficient way to improve server performance, especially for frequently requested data. By storing data in Redis memory, we can avoid repeated API calls and drastically reduce response times.
+
+Source: /benchmarks/run_1.txt

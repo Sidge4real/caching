@@ -1,0 +1,26 @@
+Analyse van de prestaties met en zonder Redis caching:
+
+1. **Met Redis (poort 8000)**:
+   - **Time to first byte**: 0.003350 seconden
+   - **Total time**: 0.003464 seconden
+
+   Uitleg:
+   - De server reageert **zeer snel**, met slechts 0.003350 seconden voor de tijd tot de eerste byte.
+   - De totale tijd van 0.003464 seconden toont aan dat Redis effectief werkt, aangezien de gegevens waarschijnlijk uit de cache worden gehaald en de server snel antwoord geeft.
+   - Dit wijst erop dat caching via Redis de prestaties aanzienlijk verbetert doordat gegevens direct beschikbaar zijn in het geheugen.
+
+2. **Zonder Redis (poort 8001)**:
+   - **Time to first byte**: 0.535900 seconden
+   - **Total time**: 0.536196 seconden
+
+   Uitleg:
+   - De tijd tot de eerste byte is **veel trager** met 0.535900 seconden, wat een significante vertraging betekent.
+   - De totale tijd van 0.536196 seconden is eveneens veel hoger. Dit komt waarschijnlijk doordat de server voor elke aanvraag opnieuw de externe API (zoals de News API) moet aanroepen.
+   - Dit benadrukt het verschil tussen de snelste toegang tot gegevens via Redis en de langzamere benadering van het ophalen van gegevens van externe bronnen.
+
+### Conclusie:
+- **Met Redis**: Het gebruik van Redis zorgt voor een aanzienlijke snelheidsverbetering doordat de gegevens lokaal in de cache worden opgeslagen, wat leidt tot snelle respons tijden voor vervolgverzoeken.
+- **Zonder Redis**: Zonder caching is de server afhankelijk van externe API-aanroepen, wat de respons tijd aanzienlijk verhoogt, vooral voor repetitieve verzoeken.
+- **Aanbeveling**: Het gebruik van Redis caching is een efficiënte manier om de prestaties van de server te verbeteren, vooral voor data die vaak opgevraagd wordt. Door de gegevens in het geheugen van Redis op te slaan, kunnen we herhaalde API-aanroepen vermijden en de responstijd drastisch verlagen.
+
+Source: /benchmarks/run_1.txt

@@ -1,0 +1,7 @@
+$ curl -w "Time to first byte: %{time_starttransfer}\nTotal time: %{time_total}\n" -o /dev/null -s http://localhost:8000/news
+Time to first byte: 0.002967
+Total time: 0.003068
+
+$ curl -w "Time to first byte: %{time_starttransfer}\nTotal time: %{time_total}\n" -o /dev/null -s http://localhost:8001/news
+Time to first byte: 0.498498
+Total time: 0.498604
