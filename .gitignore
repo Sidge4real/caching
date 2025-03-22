@@ -1,2 +1,4 @@
 cache_dir
 __pycache__
+.env
+node_modules
